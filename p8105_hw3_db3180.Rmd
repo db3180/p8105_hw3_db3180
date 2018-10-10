@@ -22,5 +22,30 @@ brfss_data = brfss_smart2010 %>%
   mutate(response = factor(response, levels = c("Excellent",  "Very good", "Good", "Fair", "Poor")))
 ```
 
+##Problem 2
+```{r}
+instacart_data = instacart %>%
+  janitor::clean_names()
+```
+This dataset has 1384617 rows/observations and 15 columns/variables. Some key variables include: product_id, reordered (which tells us if the product had been reordered by a customer), order_hour_of_day, aisle, department, etc. 
 
+
+
+```{r}
+aisle = nrow(distinct(instacart_data, aisle))
+```
+There are `r aisle` aisles. 
+```{r}
+aisle_most = aisle %>%
+  count(product_id) %>%
+  arrange(desc(n))
+```
+The aisle that most of the products are ordered from: (need to count which products are ordered the most)
+
+##Problem 3
+```{r}
+ny_noaa_data = ny_noaa %>% 
+  janitor::clean_names()
+```
+This data has 2595176 rows/observations and 7 columns/variables. Some key variables are: id(weather stattion ID, date (date of observation), prcp (Precipitation (tenths of mm), snow (Snowfall (mm)), and tmax and tmin (max and minimum temperatures). 
 
