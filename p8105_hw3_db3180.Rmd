@@ -10,23 +10,17 @@ Uploading problem 1 dataset
 ```{r setup, include=FALSE}
 install.packages("devtools")
 knitr::opts_chunk$set(echo = TRUE)
-devtools::install_github("p8105/p8105.datasets")
 library(tidyverse)
 ```
 
 ```{r}
-
+devtools::install_github("p8105/p8105.datasets")
 library(p8105.datasets)
 brfss_data = brfss_smart2010 %>%
   janitor::clean_names() %>% 
-  filter(topic == "Overall Health")
+  filter(topic == "Overall Health") %>% 
+  mutate(response = factor(response, levels = c("Excellent",  "Very good", "Good", "Fair", "Poor")))
 ```
 
-```{r}
 
-```
-
-```{r}
-
-```
 
