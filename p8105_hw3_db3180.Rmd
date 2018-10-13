@@ -49,7 +49,7 @@ brfss_data %>%
   filter(year == 2002 | year == 2006 | year == 2010, state == "NY") %>% 
   spread(response, data_value) %>% 
   janitor::clean_names() %>% 
-  group_by(state, year) %>% 
+  group_by(state, county, year) %>% 
   summarize(mean_excellent = mean(excellent, na.rm = TRUE),
              sd_excellent = sd(excellent, na.rm = TRUE)) %>% 
   knitr::kable()
@@ -113,7 +113,7 @@ Make a table showing the most popular item in each of the aisles “baking ingre
 
 ```{r}
 instacart_data %>% 
-  janitor::clean_names() %>%
+  janitor::clean_names() %>% 
   filter(aisle == "baking ingredients" | aisle == "dog food care" 
                         | aisle == "packaged vegetables fruits") %>% 
   group_by(aisle, product_name) %>% 
@@ -132,10 +132,28 @@ instacart_data %>%
 ```
 
 
-##Problem 3
+## Problem 3
 ```{r}
 ny_noaa_data = ny_noaa %>% 
-  janitor::clean_names()
+  janitor::clean_names() %>% 
+  separate(date, into = c("year", "month", "day"), sep = "-") 
 ```
 This data has 2595176 rows/observations and 7 columns/variables. Some key variables are: id(weather stattion ID, date (date of observation), prcp (Precipitation (tenths of mm), snow (Snowfall (mm)), and tmax and tmin (max and minimum temperatures). 
+
+ For snowfall, what are the most commonly observed values? Why?
+```{r}
+  ny_noaa_data %>% 
+  count(snow)
+```
+The most commonly observed values are 0 mm of snow. This is because it does not snow in most places around the world for most times of the year. 
+
+
+Make a two-panel plot showing the average max temperature in January and in July in each station across years. Is there any observable / interpretable structure? Any outliers?
+```{r}
+ny_noaa_data %>%
+  filter(month == "01" | month == "07") %>%
+  mutate(tmax = as.numeric(tmax)) %>% 
+  group_by(id, year) %>%
+  summarize(avg_max_temp = mean(tmax, na.rm = TRUE)) %>% View()
+```
 
