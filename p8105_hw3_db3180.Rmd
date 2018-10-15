@@ -162,7 +162,7 @@ ny_noaa_data %>%
   geom_point() + 
   facet_grid(~month)
 ```
-Based on this plot, it looks like there are clear differences in the max temperatures in January and in July. There is a lot of overlap in temperatures in both months around 200 temp range. However, there are a few distinct outliers: in January in 1994 and 2005 (relatively warm) and in July in 1990,1992, 2000 and 2006 (usually cold.)
+Based on this plot, it looks like there are clear differences in the max temperatures in January and in July. There is a lot of overlap in temperatures in both months around 200 temp range. However, there are a few distinct outliers: in January in 1994 and 2005 (relatively warm) and in July in 1990,1992, 2000 and 2006 (relatively cold.)
 
 Make a two-panel plot showing (i) tmax vs tmin for the full dataset (note that a scatterplot may not be the best option); and (ii) make a plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year.
 
