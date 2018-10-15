@@ -153,13 +153,15 @@ Make a two-panel plot showing the average max temperature in January and in July
 ny_noaa_data %>%
   filter(month == "01" | month == "07") %>%
   mutate(tmax = as.numeric(tmax)) %>% 
-  group_by(id, month, year) %>%
+  group_by(id, month, tmax, year) %>%
   summarize(avg_max_temp = mean(tmax, na.rm = TRUE)) %>%
   
   ggplot(aes(x = id, y = avg_max_temp, color = year)) +
   geom_line() + 
   facet_grid(~month)
 ```
+
+
 Make a two-panel plot showing (i) tmax vs tmin for the full dataset (note that a scatterplot may not be the best option); and (ii) make a plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year.
 
 ```{r}
