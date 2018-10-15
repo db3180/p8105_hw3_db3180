@@ -5,10 +5,17 @@ date: "10/9/2018"
 output: github_document
 ---
 
+```{r}
+#install.packages("hexbin")
+#install.packages("ggridges")
+#install.packages("devtools")
+```
+
 ## Problem 1 
-Uploading problem 1 dataset
+
+
 ```{r setup, include=FALSE}
-install.packages("devtools")
+
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
@@ -148,7 +155,7 @@ This data has 2595176 rows/observations and 7 columns/variables. Some key variab
 The most commonly observed values are 0 mm of snow. This is because it does not snow in most places around the world for most times of the year. 
 
 
-Make a two-panel plot showing the average max temperature in January and in July in each station across years. Is there any observable / interpretable structure? Any outliers?
+
 ```{r}
 ny_noaa_data %>%
   filter(month == "01" | month == "07") %>%
@@ -157,16 +164,14 @@ ny_noaa_data %>%
   summarize(avg_max_temp = mean(tmax, na.rm = TRUE)) %>%
   
   ggplot(aes(x = id, y = avg_max_temp, color = year)) +
-  geom_line() + 
+  geom_point() + 
   facet_grid(~month)
 ```
-
+Based on this plot, it looks like there are clear differences in the max temperatures in January and in July. There is a lot of overlap in temperatures in both months around 200 temp range. However, there are a few distinct outliers: in January in 1994 and 2005 (relatively warm) and in July in 1990,1992, 2000 and 2006 (usually cold.)
 
 Make a two-panel plot showing (i) tmax vs tmin for the full dataset (note that a scatterplot may not be the best option); and (ii) make a plot showing the distribution of snowfall values greater than 0 and less than 100 separately by year.
 
 ```{r}
-install.packages("hexbin")
-install.packages("ggridges")
 library(patchwork)
 library(hexbin)
 library(ggridges)
