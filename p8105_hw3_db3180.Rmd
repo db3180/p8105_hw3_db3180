@@ -5,11 +5,6 @@ date: "10/9/2018"
 output: github_document
 ---
 
-```{r}
-#install.packages("hexbin")
-#install.packages("ggridges")
-#install.packages("devtools")
-```
 
 ## Problem 1 
 
@@ -62,7 +57,7 @@ brfss_data %>%
   knitr::kable()
 ```
 
-For each year and state, compute the average proportion in each response category (taking the average across locations in a state). Make a five-panel plot that shows, for each response category separately, the distribution of these state-level averages over time.
+A five-panel plot that shows, for each response category separately, the distribution of these state-level averages over time.
 
 ```{r}
 brfss_data %>%
